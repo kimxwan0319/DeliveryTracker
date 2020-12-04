@@ -3,16 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		921990A22549875A000CB2C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921990A12549875A000CB2C3 /* AppDelegate.swift */; };
 		921990A42549875A000CB2C3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921990A32549875A000CB2C3 /* SceneDelegate.swift */; };
-		921990A62549875A000CB2C3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921990A52549875A000CB2C3 /* ViewController.swift */; };
 		921990A92549875A000CB2C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 921990A72549875A000CB2C3 /* Main.storyboard */; };
 		921990AB2549875C000CB2C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 921990AA2549875C000CB2C3 /* Assets.xcassets */; };
 		921990AE2549875C000CB2C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 921990AC2549875C000CB2C3 /* LaunchScreen.storyboard */; };
+		92C95A06257A1E9C00490A8D /* PostListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C95A05257A1E9C00490A8D /* PostListTableViewController.swift */; };
 		EB756C9E11FE4CE7326AE621 /* Pods_DeliveryTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14BFC68801CD4977175E74D3 /* Pods_DeliveryTracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -21,11 +21,11 @@
 		9219909E2549875A000CB2C3 /* DeliveryTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeliveryTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		921990A12549875A000CB2C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		921990A32549875A000CB2C3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		921990A52549875A000CB2C3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		921990A82549875A000CB2C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		921990AA2549875C000CB2C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		921990AD2549875C000CB2C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		921990AF2549875C000CB2C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		92C95A05257A1E9C00490A8D /* PostListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListTableViewController.swift; sourceTree = "<group>"; };
 		B540363772EC842CF807FBAF /* Pods-DeliveryTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeliveryTracker.debug.xcconfig"; path = "Target Support Files/Pods-DeliveryTracker/Pods-DeliveryTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		E0E7A0E7F44E868CE02F40C2 /* Pods-DeliveryTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeliveryTracker.release.xcconfig"; path = "Target Support Files/Pods-DeliveryTracker/Pods-DeliveryTracker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -48,7 +48,6 @@
 				B540363772EC842CF807FBAF /* Pods-DeliveryTracker.debug.xcconfig */,
 				E0E7A0E7F44E868CE02F40C2 /* Pods-DeliveryTracker.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -75,7 +74,7 @@
 			children = (
 				921990A12549875A000CB2C3 /* AppDelegate.swift */,
 				921990A32549875A000CB2C3 /* SceneDelegate.swift */,
-				921990A52549875A000CB2C3 /* ViewController.swift */,
+				92C95A05257A1E9C00490A8D /* PostListTableViewController.swift */,
 				921990A72549875A000CB2C3 /* Main.storyboard */,
 				921990AA2549875C000CB2C3 /* Assets.xcassets */,
 				921990AC2549875C000CB2C3 /* LaunchScreen.storyboard */,
@@ -206,7 +205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				921990A62549875A000CB2C3 /* ViewController.swift in Sources */,
+				92C95A06257A1E9C00490A8D /* PostListTableViewController.swift in Sources */,
 				921990A22549875A000CB2C3 /* AppDelegate.swift in Sources */,
 				921990A42549875A000CB2C3 /* SceneDelegate.swift in Sources */,
 			);
