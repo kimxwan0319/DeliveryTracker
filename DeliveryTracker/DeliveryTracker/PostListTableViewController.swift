@@ -7,36 +7,36 @@
 
 import UIKit
 import Alamofire
+import RxSwift
 
 let BaseUrl : String = "https://apis.tracker.delivery/carriers"
 
 class PostListTableViewController: UITableViewController, UITextViewDelegate {
 
     var Carriers = [Carrier]()
+    var Posts = [PostInfo]()
+    let selectedItem = BehaviorSubject(value: 0)
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getUsersPosts()
         getCarrirsData()
     }
-    
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return Posts.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PostListCell
         
-        
+        cell.stateLable.text = Posts[indexPath.row].State
+        cell.carrierLable.text = Posts[indexPath.row].Carrier.Carrier.name + " " + Posts[indexPath.row].Carrier.PostNum
+        cell.fromLable.text = Posts[indexPath.row].From
         
         return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        headerView.backgroundColor = UIColor.clear
-        return headerView
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -65,6 +65,27 @@ extension PostListTableViewController{
         })
     }
     
+    func getUsersPosts(){
+        if let posts = UserDefaults.standard.array(forKey: "Posts") as? [[String]] {
+            for post in posts {
+                AF.request(BaseUrl+"/"+post[0]+"/tracks/"+post[1]+"?"+self.now(), method: .get).validate().responseJSON(completionHandler: { res in
+                    switch res.result {
+                    case .success(let value):
+                        if let data = value as? [String : Any]{
+                            self.Posts.append(PostInfo(State: (data["state"] as! [String: String])["text"]!,
+                                                  Carrier: Post(Carrier: Carrier(name: (data["carrier"] as! [String: String])["name"]!, id: post[0]), PostNum: post[1]),
+                                                  From: (data["from"] as! [String: String])["name"]!))
+                            self.tableView.reloadData()
+                        }
+                        
+                    case .failure(let err):
+                        print(err)
+                    }
+                })
+            }
+        }
+    }
+    
     func now() -> String{
         let formatter_time = DateFormatter()
         formatter_time.dateFormat = "ss"
@@ -77,41 +98,76 @@ extension PostListTableViewController{
         let id : String
     }
 
+    struct Post {
+        let Carrier : Carrier
+        let PostNum : String
+    }
+    
+    struct PostInfo {
+        let State : String
+        let Carrier : Post
+        let From : String
+    }
 }
 
 extension PostListTableViewController : UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBAction func plusBtn(_ sender: Any) {
+        
+        var selectIndex : Int = 0
+        
         let alert = UIAlertController(title: "등록", message: "운송장 정보", preferredStyle: .alert)
-        alert.addTextField{ (TextField) in
+        alert.addTextField{ (CompanynameTextField) in
             
-            TextField.placeholder = "택배 회사"
+            CompanynameTextField.placeholder = "택배 회사"
+            CompanynameTextField.tintColor = .clear
             
             let pickerView = UIPickerView()
             pickerView.delegate = self
-            TextField.inputView = pickerView
+            CompanynameTextField.inputView = pickerView
             
             let toolBar = UIToolbar()
             toolBar.sizeToFit()
-            let button = UIBarButtonItem(title: "선택", style: .plain, target: self, action: nil)
-            toolBar.setItems([button], animated: true)
-            toolBar.isUserInteractionEnabled = true
-            TextField.inputAccessoryView = toolBar
+            CompanynameTextField.inputAccessoryView = toolBar
+            
+            self.selectedItem.subscribe(onNext: { Index in
+                CompanynameTextField.text = self.Carriers[Index].name
+                selectIndex = Index
+            })
+
             
         }
-        alert.addTextField{ (TextField) in
+        alert.addTextField{ (PostNumTextField) in
             
-            TextField.placeholder = "운송장 번호"
-            TextField.keyboardType = .numberPad
+            PostNumTextField.placeholder = "운송장 번호"
+            PostNumTextField.keyboardType = .numberPad
         }
         
-        let ok = UIAlertAction(title: "OK", style: .default) { (ok) in
-            
+        let ok = UIAlertAction(title: "등록", style: .default) { (ok) in
+            AF.request(BaseUrl+"/"+self.Carriers[selectIndex].id+"/tracks/"+alert.textFields![1].text!+"?"+self.now(), method: .get).validate().responseJSON(completionHandler: { res in
+
+                switch res.result {
+                case .success(_):
+                    if var posts = UserDefaults.standard.array(forKey: "Posts") as? [[String]]{
+                        posts.append([self.Carriers[selectIndex].id, alert.textFields![1].text!])
+                        UserDefaults.standard.set(posts, forKey: "Posts")
+                    }else {
+                        UserDefaults.standard.set([[self.Carriers[selectIndex].id, alert.textFields![1].text!]] ,forKey: "Posts")
+                    }
+                    self.alert("등록 되었습니다.")
+                    self.getUsersPosts()
+                    
+                case .failure(_ ):
+                    self.alert("없는 운송장 정보입니다.")
+                }
+            })
         }
-        let cancel = UIAlertAction(title: "cancel", style: .cancel)
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
         alert.addAction(cancel)
         alert.addAction(ok)
         self.present(alert, animated: true, completion: nil)
+        
+        
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -126,10 +182,16 @@ extension PostListTableViewController : UITextFieldDelegate, UIPickerViewDelegat
         return Carriers[row].name
     }
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
+        selectedItem.onNext(row)
     }
     
+    func alert(_ phrases : String) {
+        let alert = UIAlertController(title: phrases, message: nil, preferredStyle: .alert)
+        let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okButton)
+        self.present(alert,animated: true, completion: nil)
+    }
     
 }
 
