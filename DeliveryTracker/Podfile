@@ -7,5 +7,6 @@ target 'DeliveryTracker' do
 
   # Pods for DeliveryTracker
   pod 'Alamofire', '~> 5.2'
+  pod 'RxSwift'
 
 end
