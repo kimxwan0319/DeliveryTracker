@@ -45,10 +45,13 @@ class PostListTableViewController: UITableViewController, UITextViewDelegate {
 
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? { let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { (action, view, success ) in
             if var posts = UserDefaults.standard.array(forKey: "Posts") as? [[String]]{
+                print(posts)
                 posts.remove(at: indexPath.row)
+                print(posts)
                 UserDefaults.standard.set(posts, forKey: "Posts")
+                self.Posts.remove(at: indexPath.row)
+                self.tableView.reloadData()
             }
-            self.getUsersPosts()
         }
         let config = UISwipeActionsConfiguration(actions: [deleteAction])
         config.performsFirstActionWithFullSwipe = false
