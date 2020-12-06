@@ -54,6 +54,16 @@ class PostListTableViewController: UITableViewController, UITextViewDelegate {
         config.performsFirstActionWithFullSwipe = false
         return config
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let vcName = self.storyboard?.instantiateViewController(withIdentifier: "PostInfoPage"){
+            vcName.modalTransitionStyle = .crossDissolve
+            vcName.modalPresentationStyle = .fullScreen
+            self.present(vcName, animated: true, completion: nil)
+        }else {
+            return
+        }
+    }
 
 }
 
@@ -103,16 +113,6 @@ extension PostListTableViewController{
         formatter_time.dateFormat = "ss"
         let current_time_string = formatter_time.string(from: Date())
         return current_time_string
-    }
-    
-    struct Carrier {
-        let name : String
-        let id : String
-    }
-
-    struct Post {
-        let Carrier : Carrier
-        let PostNum : String
     }
     
     struct PostInfo {
@@ -211,4 +211,14 @@ class PostListCell: UITableViewCell {
     @IBOutlet weak var stateLable: UILabel!
     @IBOutlet weak var carrierLable: UILabel!
     @IBOutlet weak var fromLable: UILabel!
+}
+
+struct Carrier {
+    let name : String
+    let id : String
+}
+
+struct Post {
+    let Carrier : Carrier
+    let PostNum : String
 }

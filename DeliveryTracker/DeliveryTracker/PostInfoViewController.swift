@@ -8,7 +8,7 @@
 import UIKit
 
 class PostInfoViewController: UIViewController {
-
+    
     @IBOutlet weak var stateLable: UILabel!
     @IBOutlet weak var carrierLable: UILabel!
     @IBOutlet weak var postNumberLable: UILabel!
