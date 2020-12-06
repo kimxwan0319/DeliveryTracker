@@ -77,11 +77,11 @@
 				921990A12549875A000CB2C3 /* AppDelegate.swift */,
 				921990A32549875A000CB2C3 /* SceneDelegate.swift */,
 				92C95A05257A1E9C00490A8D /* PostListTableViewController.swift */,
+				9270C9A1257BEA3300C72A49 /* PostInfoViewController.swift */,
 				921990A72549875A000CB2C3 /* Main.storyboard */,
 				921990AA2549875C000CB2C3 /* Assets.xcassets */,
 				921990AC2549875C000CB2C3 /* LaunchScreen.storyboard */,
 				921990AF2549875C000CB2C3 /* Info.plist */,
-				9270C9A1257BEA3300C72A49 /* PostInfoViewController.swift */,
 			);
 			path = DeliveryTracker;
 			sourceTree = "<group>";
