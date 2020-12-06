@@ -115,16 +115,6 @@ extension PostListTableViewController{
         return current_time_string
     }
     
-    struct Carrier {
-        let name : String
-        let id : String
-    }
-
-    struct Post {
-        let Carrier : Carrier
-        let PostNum : String
-    }
-    
     struct PostInfo {
         let State : String
         let Carrier : Post
@@ -221,4 +211,14 @@ class PostListCell: UITableViewCell {
     @IBOutlet weak var stateLable: UILabel!
     @IBOutlet weak var carrierLable: UILabel!
     @IBOutlet weak var fromLable: UILabel!
+}
+
+struct Carrier {
+    let name : String
+    let id : String
+}
+
+struct Post {
+    let Carrier : Carrier
+    let PostNum : String
 }
