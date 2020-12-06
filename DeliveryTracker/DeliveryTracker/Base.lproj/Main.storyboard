@@ -72,6 +72,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="BHr-6N-WnN" kind="show" identifier="goPostInfoVC" id="DiH-t9-Mky"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j0X-oA-UBh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -102,7 +105,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dw4-lN-zEL">
-                                <rect key="frame" x="0.0" y="44" width="414" height="260"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="260"/>
                                 <subviews>
                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="iRT-PB-9Ln">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="4"/>
@@ -186,7 +189,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DCD-A4-KNp">
-                                <rect key="frame" x="0.0" y="304" width="414" height="592"/>
+                                <rect key="frame" x="0.0" y="348" width="414" height="548"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="90" id="eBa-Ql-HZg" customClass="progressesCell" customModule="DeliveryTracker" customModuleProvider="target">
@@ -264,7 +267,7 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nXK-nd-rYM">
-                                <rect key="frame" x="8" y="303" width="398" height="1"/>
+                                <rect key="frame" x="8" y="347" width="398" height="1"/>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="e6T-Ve-hod"/>
@@ -287,6 +290,7 @@
                             <constraint firstItem="dw4-lN-zEL" firstAttribute="leading" secondItem="GbD-7B-V8X" secondAttribute="leading" id="w5A-7c-pgX"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="1dG-e2-t82"/>
                     <connections>
                         <outlet property="carrierLable" destination="Vku-TR-agC" id="F1c-ef-0hw"/>
                         <outlet property="fromLable" destination="Vh3-Th-1WI" id="xkE-rz-mTQ"/>

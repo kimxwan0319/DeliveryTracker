@@ -56,12 +56,17 @@ class PostListTableViewController: UITableViewController, UITextViewDelegate {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let vcName = self.storyboard?.instantiateViewController(withIdentifier: "PostInfoPage"){
-            vcName.modalTransitionStyle = .crossDissolve
-            vcName.modalPresentationStyle = .fullScreen
-            self.present(vcName, animated: true, completion: nil)
-        }else {
-            return
+        performSegue(withIdentifier: "goPostInfoVC", sender: indexPath.row)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goPostInfoVC" {
+            if let destinationVC = segue.destination as? PostInfoViewController,
+                let indexPathRow = sender as? Int{
+                destinationVC.post = Post(Carrier: Carrier(name: Posts[indexPathRow].Carrier.Carrier.name,
+                                                           id: Posts[indexPathRow].Carrier.Carrier.id),
+                                                           PostNum: Posts[indexPathRow].Carrier.PostNum)
+            }
         }
     }
 
