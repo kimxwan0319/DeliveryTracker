@@ -9,7 +9,7 @@ import UIKit
 
 class PostInfoViewController: UIViewController {
     
-    public var post : Post
+    public var post : Post = Post(Carrier: Carrier(name: "", id: ""), PostNum: "")
     
     @IBOutlet weak var stateLable: UILabel!
     @IBOutlet weak var carrierLable: UILabel!
