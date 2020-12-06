@@ -26,11 +26,6 @@ class PostInfoViewController: UIViewController {
         super.viewDidLoad()
         getPostData()
         setTableView()
-        setNavigationBar()
-    }
-
-    func setNavigationBar(){
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     
     struct progress {
@@ -88,6 +83,10 @@ extension PostInfoViewController{
                 self.stateProgressView.setProgress(0.75, animated: true)
             }
         case "배송완료":
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                self.stateProgressView.setProgress(1, animated: true)
+            }
+        case "배달완료":
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 self.stateProgressView.setProgress(1, animated: true)
             }
