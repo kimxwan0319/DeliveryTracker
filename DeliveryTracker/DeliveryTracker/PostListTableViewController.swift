@@ -12,7 +12,7 @@ import RxSwift
 let BaseUrl : String = "https://apis.tracker.delivery/carriers"
 
 class PostListTableViewController: UITableViewController, UITextViewDelegate {
-
+    
     var Carriers = [Carrier]()
     var Posts = [PostInfo]()
     let selectedItem = BehaviorSubject(value: 0)
@@ -53,6 +53,21 @@ class PostListTableViewController: UITableViewController, UITextViewDelegate {
         let config = UISwipeActionsConfiguration(actions: [deleteAction])
         config.performsFirstActionWithFullSwipe = false
         return config
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "goPostInfoVC", sender: indexPath.row)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goPostInfoVC" {
+            if let destinationVC = segue.destination as? PostInfoViewController,
+                let indexPathRow = sender as? Int{
+                destinationVC.post = Post(Carrier: Carrier(name: Posts[indexPathRow].Carrier.Carrier.name,
+                                                           id: Posts[indexPathRow].Carrier.Carrier.id),
+                                                           PostNum: Posts[indexPathRow].Carrier.PostNum)
+            }
+        }
     }
 
 }
@@ -103,16 +118,6 @@ extension PostListTableViewController{
         formatter_time.dateFormat = "ss"
         let current_time_string = formatter_time.string(from: Date())
         return current_time_string
-    }
-    
-    struct Carrier {
-        let name : String
-        let id : String
-    }
-
-    struct Post {
-        let Carrier : Carrier
-        let PostNum : String
     }
     
     struct PostInfo {
@@ -211,4 +216,14 @@ class PostListCell: UITableViewCell {
     @IBOutlet weak var stateLable: UILabel!
     @IBOutlet weak var carrierLable: UILabel!
     @IBOutlet weak var fromLable: UILabel!
+}
+
+struct Carrier {
+    let name : String
+    let id : String
+}
+
+struct Post {
+    let Carrier : Carrier
+    let PostNum : String
 }
