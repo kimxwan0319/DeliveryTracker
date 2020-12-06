@@ -53,7 +53,7 @@ extension PostInfoViewController{
                     self.carrierLable.text = self.post.Carrier.name
                     self.postNumberLable.text = self.post.PostNum
                     self.fromLable.text = (data["from"] as! [String: String])["name"]!
-                    self.toLable.text = (data["to"] as! [String: String])["name"]!
+                    self.toLable.text = (data["to"] as! [String: Any])["name"]! as? String
                     
                     for progressIndex in data["progresses"] as! [[String: Any]]{
                         self.progresses.insert(progress(at: progressIndex["time"] as! String,
@@ -76,6 +76,10 @@ extension PostInfoViewController{
                 self.stateProgressView.setProgress(0.25, animated: true)
             }
         case "이동중":
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                self.stateProgressView.setProgress(0.5, animated: true)
+            }
+        case "상품이동중":
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 self.stateProgressView.setProgress(0.5, animated: true)
             }
