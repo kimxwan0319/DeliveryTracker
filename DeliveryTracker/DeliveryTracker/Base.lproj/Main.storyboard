@@ -96,7 +96,7 @@
         <!--Post Info View Controller-->
         <scene sceneID="ykD-Bq-QNN">
             <objects>
-                <viewController id="BHr-6N-WnN" customClass="PostInfoViewController" customModule="DeliveryTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PostInfoPage" id="BHr-6N-WnN" customClass="PostInfoViewController" customModule="DeliveryTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TOw-RH-9W1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
