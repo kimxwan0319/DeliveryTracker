@@ -54,6 +54,16 @@ class PostListTableViewController: UITableViewController, UITextViewDelegate {
         config.performsFirstActionWithFullSwipe = false
         return config
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let vcName = self.storyboard?.instantiateViewController(withIdentifier: "PostInfoPage"){
+            vcName.modalTransitionStyle = .crossDissolve
+            vcName.modalPresentationStyle = .fullScreen
+            self.present(vcName, animated: true, completion: nil)
+        }else {
+            return
+        }
+    }
 
 }
 
