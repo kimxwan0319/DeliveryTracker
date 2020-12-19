@@ -6,7 +6,9 @@ target 'DeliveryTracker' do
   use_frameworks!
 
   # Pods for DeliveryTracker
-  pod 'Alamofire', '~> 5.2'
+  pod 'Alamofire'
+  pod 'ObjectMapper'
   pod 'RxSwift'
+  
 
 end
