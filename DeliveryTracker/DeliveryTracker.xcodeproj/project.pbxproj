@@ -81,8 +81,7 @@
 				921990AF2549875C000CB2C3 /* Info.plist */,
 				92C88EFE258DB37000F95432 /* Resources */,
 				92C88F0A258DB42D00F95432 /* Assets */,
-				92C88F0C258DB47C00F95432 /* PostList */,
-				9270C9A1257BEA3300C72A49 /* PostInfoViewController.swift */,
+				92C88F22258DE63B00F95432 /* Page */,
 			);
 			path = DeliveryTracker;
 			sourceTree = "<group>";
@@ -114,6 +113,15 @@
 				92C88F0D258DC14500F95432 /* PostListCell.swift */,
 			);
 			path = PostList;
+			sourceTree = "<group>";
+		};
+		92C88F22258DE63B00F95432 /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				92C88F0C258DB47C00F95432 /* PostList */,
+				9270C9A1257BEA3300C72A49 /* PostInfoViewController.swift */,
+			);
+			path = Page;
 			sourceTree = "<group>";
 		};
 		A2F008503E8EE69C4ED34181 /* Frameworks */ = {
